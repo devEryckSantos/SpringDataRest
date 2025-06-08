@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import tech.buildrun.rest.entity.UserEntity;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface UserRestRepository extends
         PagingAndSortingRepository<UserEntity, UUID> {
 
     List<UserEntity> findByName(@Param("name") String name);
- }
+
+    @Override
+    @RestResource(exported = false)
+    void deleteById(UUID uuid);
+}
